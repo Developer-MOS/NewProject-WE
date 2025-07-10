@@ -34,11 +34,11 @@ const LoginPage: React.FC<{ onLogin: (data: { logo: File | null; companyName: st
         sx={{
           position: 'relative',
           overflow: 'hidden',
-          p: { xs: 2, sm: 3, md: 4, lg: 5 },
-          borderRadius: 4,
-          maxWidth: { xs: 340, sm: 400, md: 440, lg: 500, xl: 600 },
+          p: { xs: 0.5, sm: 1, md: 1.2, lg: 1.5 },
+          borderRadius: 2,
+          maxWidth: { xs: 200, sm: 220, md: 240, lg: 260, xl: 480 },
           width: '100%',
-          minWidth: { xs: '90vw', sm: 360, md: 400, lg: 420 },
+          minWidth: { xs: '90vw', sm: 160, md: 180, lg: 200 },
           mx: 'auto',
           boxSizing: 'border-box',
           background: 'transparent',
@@ -59,8 +59,8 @@ const LoginPage: React.FC<{ onLogin: (data: { logo: File | null; companyName: st
           },
         }}
       >
-        <Box display="flex" flexDirection="column" alignItems="center" gap={2} sx={{ position: 'relative', zIndex: 1 }}>
-          <Typography variant="h5" fontWeight={700} mb={2} color="primary">Company Login</Typography>
+        <Box display="flex" flexDirection="column" alignItems="center" gap={0.5} sx={{ position: 'relative', zIndex: 1 }}>
+          <Typography variant="h6" fontWeight={700} mb={1} color="primary" fontSize={16}>Company Login</Typography>
           <input
             accept="image/*"
             style={{ display: 'none' }}
@@ -69,13 +69,13 @@ const LoginPage: React.FC<{ onLogin: (data: { logo: File | null; companyName: st
             onChange={handleLogoChange}
           />
           <label htmlFor="logo-upload">
-            <IconButton component="span" size="large">
-              <Avatar src={logoPreview || undefined} sx={{ width: 72, height: 72, bgcolor: '#e3e3e3' }}>
-                {!logoPreview && <CloudUploadIcon fontSize="large" />}
+            <IconButton component="span" size="small" style={{ scale: 2 }}>
+              <Avatar src={logoPreview || undefined} sx={{ width: 32, height: 32, bgcolor: '#e3e3e3' }}>
+                {!logoPreview && <CloudUploadIcon fontSize="small" />}
               </Avatar>
             </IconButton>
           </label>
-          <Typography variant="caption" color="text.secondary">Upload Company Logo</Typography>
+          <Typography fontSize={11} variant="caption" color="text.secondary" sx={{ pt: 1 }}>Upload Company Logo</Typography>
           <TextField
             label="Company Name"
             variant="outlined"
@@ -117,7 +117,7 @@ const LoginPage: React.FC<{ onLogin: (data: { logo: File | null; companyName: st
             size="large"
             sx={{ mt: 3, borderRadius: 2, height: 48 }}
             onClick={handleLogin}
-            disabled={loading || !companyName || !apiKey || !apiUrl || !clientId}
+            // disabled={loading || !companyName || !apiKey || !apiUrl || !clientId}
           >
             {loading ? <CircularProgress size={28} color="inherit" /> : 'Login'}
           </Button>
