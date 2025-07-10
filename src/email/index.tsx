@@ -10,12 +10,12 @@ const EmailApp = () => {
     return (
       <Box
         sx={{
-          height: '100vh',
           display: 'flex',
+          height:'100vh',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#f6f8fc',
+          // backgroundColor: '#f6f8fc',
           overflowY: 'none',
           gap: 2,
         }}

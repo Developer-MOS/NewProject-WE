@@ -33,7 +33,6 @@ const EmailView = () => {
     <Box
       sx={{
         flex: 1,
-        top:59,
         position:'relative',
         height: '100%',
         width:'100%',

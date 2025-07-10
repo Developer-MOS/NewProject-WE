@@ -64,7 +64,6 @@ const SidebarContainer = styled(Box, {
   width: '256px',
   height: '100%',
   position:'relative',
-  top:58,
   backgroundColor: '#ffffff',
   borderRight: '1px solid #e0e0e0',
   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -80,22 +79,22 @@ const Sidebar = ({ open }: SidebarProps) => {
 
   const primaryMenuItems = [
     { text: 'Inbox', icon: <InboxIcon />, count: 125, selected: true },
-    { text: 'Starred', icon: <StarIcon /> },
-    { text: 'Snoozed', icon: <SnoozeIcon /> },
-    { text: 'Important', icon: <PriorityHighIcon /> },
-    { text: 'Sent', icon: <SendIcon /> },
-    { text: 'Drafts', icon: <DraftsIcon />, count: 3 },
-    { text: 'Chats', icon: <ChatIcon /> },
-    { text: 'Scheduled', icon: <ScheduleIcon /> },
-    { text: 'Trash', icon: <DeleteIcon /> },
-    { text: 'Spam', icon: <ReportIcon /> },
+    // { text: 'Starred', icon: <StarIcon /> },
+    // { text: 'Snoozed', icon: <SnoozeIcon /> },
+    // { text: 'Important', icon: <PriorityHighIcon /> },
+    // { text: 'Sent', icon: <SendIcon /> },
+    // { text: 'Drafts', icon: <DraftsIcon />, count: 3 },
+    // { text: 'Chats', icon: <ChatIcon /> },
+    // { text: 'Scheduled', icon: <ScheduleIcon /> },
+    // { text: 'Trash', icon: <DeleteIcon /> },
+    // { text: 'Spam', icon: <ReportIcon /> },
   ];
 
   const labelMenuItems = [
-    { text: 'Work', color: '#4285f4' },
-    { text: 'Personal', color: '#ea4335' },
-    { text: 'Travel', color: '#fbbc04' },
-    { text: 'Finance', color: '#34a853' },
+    // { text: 'Work', color: '#4285f4' },
+    // { text: 'Personal', color: '#ea4335' },
+    // { text: 'Travel', color: '#fbbc04' },
+    // { text: 'Finance', color: '#34a853' },
   ];
 
   return (
@@ -169,7 +168,7 @@ const Sidebar = ({ open }: SidebarProps) => {
       </List>
       <Divider sx={{ my: 1 }} />
       <List>
-        <ListItem disablePadding>
+        {/* <ListItem disablePadding>
           <ListItemButton
             sx={{
               borderRadius: '0 16px 16px 0',
@@ -190,8 +189,8 @@ const Sidebar = ({ open }: SidebarProps) => {
               }}
             />
           </ListItemButton>
-        </ListItem>
-        {labelMenuItems.map((item) => (
+        </ListItem> */}
+        {/* {labelMenuItems.map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton
               sx={{
@@ -221,7 +220,7 @@ const Sidebar = ({ open }: SidebarProps) => {
               />
             </ListItemButton>
           </ListItem>
-        ))}
+        ))} */}
       </List>
     </SidebarContainer>
   );

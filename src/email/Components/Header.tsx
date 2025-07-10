@@ -123,7 +123,7 @@ const Header = ({ onMenuClick }: HeaderProps) => {
         </Search>
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-          <Tooltip title="Notifications">
+          {/* <Tooltip title="Notifications">
             <IconButton
               sx={{
                 color: '#5f6368',
@@ -136,8 +136,8 @@ const Header = ({ onMenuClick }: HeaderProps) => {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-          </Tooltip>
-          <Tooltip title="Settings">
+          </Tooltip> */}
+          {/* <Tooltip title="Settings">
             <IconButton
               sx={{
                 color: '#5f6368',
@@ -148,7 +148,7 @@ const Header = ({ onMenuClick }: HeaderProps) => {
             >
               <SettingsIcon />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip title="Google Account">
             <Avatar
               sx={{
