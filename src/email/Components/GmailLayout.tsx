@@ -9,7 +9,7 @@ import { useEmail } from '../../context/EmailContext';
 
 const GmailLayout = () => {
 
-  const { showCompose , setShowCompose } = useEmail();
+  const { showCompose, setShowCompose } = useEmail();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
@@ -20,7 +20,7 @@ const GmailLayout = () => {
   return (
 
 
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '80vh' }}>
       <Header isSidebarOpen={isSidebarOpen} onMenuClick={handleMenuClick} />
       <Box sx={{ display: 'flex', width: '100%', height: 'calc(100vh - 64px)' }}>
         <Sidebar open={isSidebarOpen} />
@@ -36,8 +36,8 @@ const GmailLayout = () => {
         >
           <EmailList />
         </Box>
-          <EmailView />
-          {showCompose && <ComposeEmail onClose={() => setShowCompose(false)} />}
+        <EmailView />
+        {showCompose && <ComposeEmail onClose={() => setShowCompose(false)} />}
       </Box>
     </Box>
 

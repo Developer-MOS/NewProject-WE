@@ -20,10 +20,11 @@ const EmailView = () => {
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: '#ffffff',
+          height: '85vh'
         }}
       >
         <Typography variant="h6" color="text.secondary">
-          Select an email to read
+          Please select an email to read.
         </Typography>
       </Box>
     );
@@ -33,9 +34,10 @@ const EmailView = () => {
     <Box
       sx={{
         flex: 1,
-        position:'relative',
-        height: '100%',
-        width:'100%',
+        position: 'relative',
+        // height: '100%',
+        height: '78vh',
+        width: '100%',
         overflowY: 'auto',
         backgroundColor: '#ffffff',
         p: 3,

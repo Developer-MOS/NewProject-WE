@@ -65,7 +65,8 @@ const EmailApp = () => {
     return (
       <Box
         sx={{
-          height:'100%',
+          // height:'100%',
+          height:'93vh',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',

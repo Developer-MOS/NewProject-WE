@@ -1,19 +1,15 @@
 import {
-  AppBar,
-  Toolbar,
   IconButton,
   InputBase,
   Avatar,
   Box,
-  Badge,
   Tooltip,
   alpha,
 } from '@mui/material';
 import {
   Menu as MenuIcon,
   Search as SearchIcon,
-  Settings as SettingsIcon,
-  Notifications as NotificationsIcon,
+  Close as CloseIcon,
 } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 
@@ -72,102 +68,81 @@ interface HeaderProps {
   onMenuClick: () => void;
 }
 
-const Header = ({ onMenuClick }: HeaderProps) => {
+const Header = ({ isSidebarOpen, onMenuClick }: HeaderProps) => {
   return (
-    <AppBar
-      position="fixed"
+    <Box
       sx={{
-        zIndex: (theme) => theme.zIndex.drawer + 1,
+        // width: '100%',
         backgroundColor: '#ffffff',
         color: '#202124',
         boxShadow: '0 1px 2px 0 rgba(60,64,67,0.3), 0 2px 6px 2px rgba(60,64,67,0.15)',
+        display: 'flex',
+        alignItems: 'center',
+        minHeight: '64px',
+        px: 3,
+        position: 'relative',
+        zIndex: 1,
       }}
     >
-      <Toolbar sx={{ minHeight: '64px' }}>
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          onClick={onMenuClick}
-          sx={{
-            mr: 2,
-            color: '#5f6368',
-            '&:hover': {
-              backgroundColor: 'rgba(60,64,67,0.08)',
-            },
-          }}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Box
-          component="img"
-          src="/email.png"
-          alt="Gmail"
-          sx={{
-            height: 40,
-            mr: 2,
-            transition: 'opacity 0.2s ease-in-out',
-            '&:hover': {
-              opacity: 0.8,
-            },
-          }}
+      <IconButton
+        edge="start"
+        color="inherit"
+        aria-label="menu"
+        onClick={onMenuClick}
+        sx={{
+          mr: 2,
+          color: '#5f6368',
+          transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          transform: isSidebarOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+          '&:hover': {
+            backgroundColor: 'rgba(60,64,67,0.08)',
+          },
+        }}
+      >
+        {isSidebarOpen ? <CloseIcon /> : <MenuIcon />}
+      </IconButton>
+      <Box
+        component="img"
+        src="/email.png"
+        alt="Gmail"
+        sx={{
+          height: 40,
+          mr: 2,
+          transition: 'opacity 0.2s ease-in-out',
+          '&:hover': {
+            opacity: 0.8,
+          },
+        }}
+      />
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Search mail"
+          inputProps={{ 'aria-label': 'search' }}
         />
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search mail"
-            inputProps={{ 'aria-label': 'search' }}
+      </Search>
+      <Box sx={{ flexGrow: 1 }} />
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+        <Tooltip title="Google Account">
+          <Avatar
+            sx={{
+              width: 32,
+              height: 32,
+              cursor: 'pointer',
+              ml: 1,
+              transition: 'transform 0.2s ease-in-out',
+              '&:hover': {
+                transform: 'scale(1.1)',
+              },
+            }}
+            alt="User"
+            src="/avatar.jpg"
           />
-        </Search>
-        <Box sx={{ flexGrow: 1 }} />
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-          {/* <Tooltip title="Notifications">
-            <IconButton
-              sx={{
-                color: '#5f6368',
-                '&:hover': {
-                  backgroundColor: 'rgba(60,64,67,0.08)',
-                },
-              }}
-            >
-              <Badge badgeContent={4} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Tooltip> */}
-          {/* <Tooltip title="Settings">
-            <IconButton
-              sx={{
-                color: '#5f6368',
-                '&:hover': {
-                  backgroundColor: 'rgba(60,64,67,0.08)',
-                },
-              }}
-            >
-              <SettingsIcon />
-            </IconButton>
-          </Tooltip> */}
-          <Tooltip title="Google Account">
-            <Avatar
-              sx={{
-                width: 32,
-                height: 32,
-                cursor: 'pointer',
-                ml: 1,
-                transition: 'transform 0.2s ease-in-out',
-                '&:hover': {
-                  transform: 'scale(1.1)',
-                },
-              }}
-              alt="User"
-              src="/avatar.jpg"
-            />
-          </Tooltip>
-        </Box>
-      </Toolbar>
-    </AppBar>
+        </Tooltip>
+      </Box>
+    </Box>
   );
 };
 

@@ -62,7 +62,8 @@ const SidebarContainer = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'open',
 })<{ open: boolean }>(({ open }) => ({
   width: '256px',
-  height: '100%',
+  // height: '100%',
+  height:'85vh',
   position:'relative',
   backgroundColor: '#ffffff',
   borderRight: '1px solid #e0e0e0',

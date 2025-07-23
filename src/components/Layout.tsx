@@ -1,5 +1,6 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography, Avatar, Box, Grid } from '@mui/material';
+import React, { useState } from 'react';
+import { Box } from '@mui/material';
+import Sidebar from './Sidebar';
 
 interface LayoutProps {
   companyName: string;
@@ -7,20 +8,25 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ companyName, logoUrl, children }) => {
+const drawerWidth = 80;
+const expandedWidth = 220;
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
   return (
-    <Box sx={{ minHeight: '100vh', width : '100%', background: 'linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%)' }}>
-      <AppBar position="static" color="default" elevation={2} sx={{ mb: 1.5 }}>
-        <Toolbar>
-          <Avatar src={logoUrl} sx={{ width: 40, height: 40, bgcolor: '#e3e3e3', mr: 2 }} />
-          <Typography variant="h6" fontWeight={700} color="primary" sx={{ flexGrow: 1 }}>
-            {companyName}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Grid sx={{ width:'100vw' }}>
+    <Box sx={{ minHeight: '100vh', width: '100%', bgcolor: '#f5faff' }}>
+      <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
+      <Box
+        sx={{
+          transition: 'margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          ml: sidebarOpen ? `${expandedWidth}px` : `${drawerWidth}px`,
+          p: { xs: 1, sm: 1 },
+          minWidth: 0,
+        }}
+      >
         {children}
-      </Grid>
+      </Box>
     </Box>
   );
 };
