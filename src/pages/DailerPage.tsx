@@ -10,27 +10,27 @@ import PersonIcon from '@mui/icons-material/Person';
 const incomingCall = {
   number: '+91 9876543210',
   time: '09:30 AM',
-  name: 'Ravi Kumar',
+  name: 'Shabaz',
   avatar: '', // Could be a URL or empty for initials
 };
 
 const callHistory = [
-  { number: '+91 9123456789', time: 'Yesterday', name: 'Priya Singh' },
-  { number: '+91 9988776655', time: '2 days ago', name: 'Amit Sharma' },
-  { number: '+91 9001122334', time: '3 days ago', name: 'Sita Devi' },
-  { number: '+91 9001122334', time: '3 days ago', name: 'Sita Devi' },
-  { number: '+91 9001122334', time: '3 days ago', name: 'Sita Devi' },
-  { number: '+91 9001122334', time: '3 days ago', name: 'Sita Devi' },
-  { number: '+91 9001122334', time: '3 days ago', name: 'Sita Devi' },
-  { number: '+91 9001122334', time: '3 days ago', name: 'Sita Devi' },
-  { number: '+91 9001122334', time: '3 days ago', name: 'Sita Devi' },
-  { number: '+91 9001122334', time: '3 days ago', name: 'Sita Devi' },
-  { number: '+91 9001122334', time: '3 days ago', name: 'Sita Devi' },
-  { number: '+91 9001122334', time: '3 days ago', name: 'Sita Devi' },
-  { number: '+91 9001122334', time: '3 days ago', name: 'Sita Devi' },
-  { number: '+91 9001122334', time: '3 days ago', name: 'Sita Devi' },
-  { number: '+91 9001122334', time: '3 days ago', name: 'Sita Devi' },
-  { number: '+91 9001122334', time: '3 days ago', name: 'Sita Devi' },
+  { number: '+91 9123456789', time: 'Yesterday', name: 'Sathis Kumar' },
+  { number: '+91 9988776655', time: '2 days ago', name: 'Vishal Dev' },
+  { number: '+91 9001122334', time: '3 days ago', name: 'Shabaz Ali' },
+  { number: '+91 9001122334', time: '3 days ago', name: 'Anand' },
+  { number: '+91 9001122334', time: '3 days ago', name: 'Anand' },
+  { number: '+91 9001122334', time: '3 days ago', name: 'Anand' },
+  { number: '+91 9001122334', time: '3 days ago', name: 'Anand' },
+  { number: '+91 9001122334', time: '3 days ago', name: 'Anand' },
+  { number: '+91 9001122334', time: '3 days ago', name: 'Anand' },
+  { number: '+91 9001122334', time: '3 days ago', name: 'Anand' },
+  { number: '+91 9001122334', time: '3 days ago', name: 'Anand' },
+  { number: '+91 9001122334', time: '3 days ago', name: 'Anand' },
+  { number: '+91 9001122334', time: '3 days ago', name: 'Anand' },
+  { number: '+91 9001122334', time: '3 days ago', name: 'Anand' },
+  { number: '+91 9001122334', time: '3 days ago', name: 'Anand' },
+  { number: '+91 9001122334', time: '3 days ago', name: 'Anand' },
 ];
 
 const getInitials = (name: string) => name.split(' ').map(n => n[0]).join('').toUpperCase();
