@@ -11,8 +11,8 @@ const HomePageContent: React.FC = () => {
                 <CircularProgress size={64} thickness={5} />
             </Box>
         ) : (
-            <Box sx={{ width: '100vw', background: '#f5f7fa', marginBottom: 200 }}>
-                <Grid container spacing={0} sx={{ height: '90vh', width: '100%' }}>
+            <Box sx={{ width: '100%', background: '#f5f7fa', marginBottom: 200 }}>
+                <Grid container spacing={0} sx={{ height: '97vh', width: '100%' }}>
                     <Grid sx={{ height: '100%', width: '20%' }}>
                         <LeftMenu />
                     </Grid>

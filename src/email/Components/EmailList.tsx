@@ -22,7 +22,6 @@ const EmailList = () => {
       sx={{
         width: '100%',
         height: '100%',
-        // height:'85vh',
         position: 'relative',
         borderRight: '1px solid #e0e0e0',
         overflowY: 'auto',

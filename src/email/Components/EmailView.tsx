@@ -20,7 +20,7 @@ const EmailView = () => {
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: '#ffffff',
-          height: '85vh'
+          height: '100%'
         }}
       >
         <Typography variant="h6" color="text.secondary">
@@ -35,8 +35,7 @@ const EmailView = () => {
       sx={{
         flex: 1,
         position: 'relative',
-        // height: '100%',
-        height: '78vh',
+        height: '100%',
         width: '100%',
         overflowY: 'auto',
         backgroundColor: '#ffffff',

@@ -22,11 +22,11 @@ const GmailLayout = () => {
 
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '80vh' }}>
       <Header isSidebarOpen={isSidebarOpen} onMenuClick={handleMenuClick} />
-      <Box sx={{ display: 'flex', width: '100%', height: 'calc(100vh - 64px)' }}>
+      <Box sx={{ display: 'flex', width: '100%', height: 'calc(97vh - 64px)' }}>
         <Sidebar open={isSidebarOpen} />
         <Box
           sx={{
-            height: '100vh',
+            height: '100%',
             width: '400px',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             overflow: 'hidden',
