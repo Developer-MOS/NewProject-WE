@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import Layout from './components/Layout';
@@ -39,6 +39,20 @@ const AppRoutes: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+
+  useEffect(() => {
+
+    setLoginData({
+      logo: null,
+      companyName: '',
+      apiKey: '',
+      apiUrl: '',
+      clientId: '',
+    })
+
+  }, [])
+
+
   const handleLogin = (data: LoginData) => {
     setLoginData(data);
     if (data.logo) {
@@ -49,7 +63,7 @@ const AppRoutes: React.FC = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      navigate('/wati'); // Go directly to sidebar layout after login
+      // navigate('/wati'); 
     }, 800);
   };
 
@@ -61,6 +75,10 @@ const AppRoutes: React.FC = () => {
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>;
   }
+
+  // console.log(loginData,'LoginData used for fetch and used for other apis')
+
+
 
   // After login, always show Layout with sidebar
   return (

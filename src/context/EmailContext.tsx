@@ -109,7 +109,9 @@ export function EmailProvider({ children }: { children: ReactNode }) {
   const signInButtonRef = useRef<HTMLDivElement>(null);
   const [showCompose, setShowCompose] = useState(false);
 
-  console.log(sdkReady)
+  console.log(sdkReady);
+  console.log(bearerToken,'This is the BearerToken....');
+  console.log(isAuthenticated,'Is this authenticated....');
 
   useEffect(() => {
 
@@ -168,6 +170,7 @@ export function EmailProvider({ children }: { children: ReactNode }) {
 
   const handleLogin = () => {
     if (tokenClientRef.current) {
+      // alert('Requesting Token')
       tokenClientRef.current.requestAccessToken();
     } else {
       setAuthError("Google SDK not ready yet, please wait...");
