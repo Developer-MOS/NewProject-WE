@@ -33,6 +33,8 @@ export interface WatiContextType {
     setMessage: (msg: string) => void;
     loading: boolean;
     handleSendMessage: (msg: unknown) => Promise<void>;
+    reFetchMessages : boolean;
+    setReFetchMessages : (value : boolean) => void;
 }
 
 export const WatiContext = createContext<WatiContextType | undefined>(undefined);
