@@ -523,6 +523,8 @@ const StatsSection = ({
   exportHandler,
   timeView,
   setTimeView,
+  selectedStat,
+  setSelectedStat,
 }: any) => {
   if (loading) {
     return (
@@ -565,6 +567,31 @@ const StatsSection = ({
     ([key, value]) => ({ name: key, value })
   );
 
+  const exportToCSV = (data: any) => {
+    const rows = [
+      ['Metric', 'Value'],
+      ['Average Response Time', data.avgResponseTime],
+      ['Total Tickets Responded', data.totalTickets],
+      ['Open Tickets', data.statusOverview.open],
+      ['Pending Tickets', data.statusOverview.pending],
+      ['Closed Tickets', data.statusOverview.closed],
+      ['Daily Responded', data.timeBased.daily.responded],
+      ['Weekly Responded', data.timeBased.weekly.responded],
+      ['Monthly Responded', data.timeBased.monthly.responded],
+      ...Object.entries(data.category).map(([cat, val]) => [`Category: ${cat}`, val]),
+    ];
+    const csvContent =
+      'data:text/csv;charset=utf-8,' +
+      rows.map((e) => e.join(',')).join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'wati_stats.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <Box
       sx={{
@@ -590,10 +617,22 @@ const StatsSection = ({
         }}
       >
         <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
-          <Typography variant="h5" fontWeight={700} color="primary">
-            Wati Stats
-          </Typography>
-          <Button
+          <Box
+            display='flex'
+            gap={2}
+          >
+            <Typography variant="h5" fontWeight={700} color="primary">
+              {selectedStat} Stats
+            </Typography>
+            <FormControl size="small" sx={{ mb: 2, minWidth: 200 }}>
+              <Select value={selectedStat} onChange={(e) => setSelectedStat(e.target.value)}>
+                <MenuItem value="Wati">Wati Stats</MenuItem>
+                <MenuItem value="Call">Call Stats</MenuItem>
+                <MenuItem value="Email">Email Stats</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          {/* <Button
             variant="contained"
             color="primary"
             startIcon={<DownloadIcon />}
@@ -602,7 +641,7 @@ const StatsSection = ({
             size="small"
           >
             Export
-          </Button>
+          </Button> */}
         </Box>
         {loading ? (
           <Box display="flex" justifyContent="center" alignItems="center" minHeight={120}>
@@ -990,14 +1029,14 @@ export default function StaticsPage() {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", p: 3 }}>
-      <FormControl size="small" sx={{ mb: 2, minWidth: 200 }}>
+      {/* <FormControl size="small" sx={{ mb: 2, minWidth: 200 }}>
         <InputLabel>Select Stats</InputLabel>
         <Select value={selectedStat} onChange={(e) => setSelectedStat(e.target.value)}>
           <MenuItem value="Wati">Wati Stats</MenuItem>
           <MenuItem value="Call">Call Stats</MenuItem>
           <MenuItem value="Email">Email Stats</MenuItem>
         </Select>
-      </FormControl>
+      </FormControl> */}
 
       <StatsSection
         title={`${selectedStat} Stats`}
@@ -1007,6 +1046,8 @@ export default function StaticsPage() {
         exportHandler={() => { }} // Reuse your CSV export function
         timeView={timeView}
         setTimeView={setTimeView}
+        selectedStat={selectedStat}
+        setSelectedStat={setSelectedStat}
       />
     </Box>
   );
@@ -1021,35 +1062,35 @@ const sectionStyle = {
   boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
 };
 
-const timeCardStyle = {
-  borderRadius: 2,
-  boxShadow: "none",
-  borderColor: "#e0e0e0",
-  minHeight: 100,
-  width: 150,
-  height: 100,
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-};
+// const timeCardStyle = {
+//   borderRadius: 2,
+//   boxShadow: "none",
+//   borderColor: "#e0e0e0",
+//   minHeight: 100,
+//   width: 150,
+//   height: 100,
+//   display: "flex",
+//   justifyContent: "center",
+//   alignItems: "center",
+// };
 
-const categoryCardStyle = {
-  borderRadius: 2,
-  boxShadow: "none",
-  borderColor: "#e0e0e0",
-  minHeight: 140,
-  height: 140,
-  width: 200,
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-};
+// const categoryCardStyle = {
+//   borderRadius: 2,
+//   boxShadow: "none",
+//   borderColor: "#e0e0e0",
+//   minHeight: 140,
+//   height: 140,
+//   width: 200,
+//   display: "flex",
+//   justifyContent: "center",
+//   alignItems: "center",
+// };
 
-const categoryContentStyle = {
-  textAlign: "center",
-  p: 1,
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-};
+// const categoryContentStyle = {
+//   textAlign: "center",
+//   p: 1,
+//   display: "flex",
+//   flexDirection: "column",
+//   justifyContent: "center",
+//   alignItems: "center",
+// };
