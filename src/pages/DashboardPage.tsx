@@ -8,6 +8,7 @@ import { useEmail } from '../context/EmailContext';
 import DailerPage from './DailerPage';
 import NotificationModal from '../components/notification';
 import useSSE from '../components/useSSE';
+import { useAppContext } from '../context/AppContext';
 
 
 // Animated loader using CSS keyframes (spinner)
@@ -138,17 +139,20 @@ const EmailDemo = () => {
 
 const DashboardPage: React.FC = () => {
 
-  const { reFetchMessages,setReFetchMessages } = useWati();
+  // const { reFetchMessages, setReFetchMessages } = useWati();
 
-  const handleNew = useCallback((payload) => {
+  const { openWatiNotification , setOpenWatiNotification } = useAppContext();
 
-    setReFetchMessages(!reFetchMessages);
+  // const handleNew = useCallback((payload) => {
 
-    console.log(payload, 'This is the payload I have . . . . ');
+  //   setReFetchMessages(!reFetchMessages);
 
-  }, []);
+  //   setOpenWatiNotification(true);
 
-  useSSE(handleNew);
+  //   console.log(payload, 'This is the payload I have . . . . ');
+  // }, []);
+
+  // useSSE(handleNew);
 
   return (
     <Box
@@ -164,7 +168,7 @@ const DashboardPage: React.FC = () => {
         padding: 0.3
       }}
     >
-      {[() => <WatiProvider><WatiDemo /></WatiProvider>, DailerDemo, EmailDemo].map((Component, idx) => (
+      {[() => <WatiDemo />, DailerDemo, EmailDemo].map((Component, idx) => (
         <Box
           key={idx}
           sx={{
@@ -187,12 +191,7 @@ const DashboardPage: React.FC = () => {
           <Component />
         </Box>
       ))}
-      {/* <NotificationModal
-      type="wati"
-      open={true}
-      onClose={() => { }}
-      onReply={() => { }}
-    /> */}
+      
     </Box>
   )
 };

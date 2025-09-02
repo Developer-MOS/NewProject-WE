@@ -4,6 +4,7 @@ import { apiCall } from '../utils/apiFunctionCall';
 import { getEnv } from '../config/env';
 import type { Contact, Message, ApiContactsResponse, ApiMessagesResponse } from './WatiContext.types';
 import { WatiContext } from './WatiContext.types';
+import { useAppContext } from './AppContext';
 // import { useWati, WatiContext } from './WatiContext.types';
 
 export const WatiProvider = ({ children }: { children: ReactNode }) => {
@@ -13,7 +14,8 @@ export const WatiProvider = ({ children }: { children: ReactNode }) => {
     const [currentActiveChatObjData, setCurrentActiveChatObjData] = useState<{ name: string; lastseen: string }>({ name: '', lastseen: '' });
     const [message, setMessage] = useState<string>('');
     const [loading, setLoading] = useState(true);
-    const [reFetchMessages, setReFetchMessages] = useState(false);
+    const { reFetchMessages } = useAppContext();
+    // const [reFetchMessages, setReFetchMessages] = useState(false);
 
     useEffect(() => {
         const getData = async () => {
@@ -31,7 +33,7 @@ export const WatiProvider = ({ children }: { children: ReactNode }) => {
             setLoading(false);
         };
         getData();
-    }, [reFetchMessages]);
+    }, []);
 
     useEffect(() => {
         const getMessagesDataBasedOnNumber = async () => {
@@ -75,9 +77,7 @@ export const WatiProvider = ({ children }: { children: ReactNode }) => {
             message,
             setMessage,
             loading,
-            handleSendMessage,
-            reFetchMessages, 
-            setReFetchMessages,
+            handleSendMessage
         }}>
             {children}
         </WatiContext.Provider>

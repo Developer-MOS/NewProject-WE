@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import Layout from './components/Layout';
@@ -11,6 +11,9 @@ import DailerPage from './pages/DailerPage';
 import StaticsPage from './pages/StaticsPage';
 import DashboardPage from './pages/DashboardPage';
 import WatiProvider from './context/WatiContext';
+import NotificationModal from './components/notification';
+import useSSE from './components/useSSE';
+import { useWati } from './context/WatiContext.types';
 
 interface LoginData {
   logo: File | null;
@@ -37,7 +40,27 @@ const AppRoutes: React.FC = () => {
   const [loginData, setLoginData] = useState<LoginData | null>(null);
   const [logoUrl, setLogoUrl] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState(false);
+  const [openEmailNotification, setOpenEmailNotification] = useState(false);
+  const [openWatiNotification, setOpenWatiNotification] = useState(false);
+  const [reFetchMessages, setReFetchMessages] = useState(false);
+
+
+  // const { reFetchMessages, setReFetchMessages } = useWati();
+
+
   const navigate = useNavigate();
+
+
+  const handleNew = useCallback((payload) => {
+
+    setReFetchMessages(!reFetchMessages);
+
+    setOpenWatiNotification(true);
+
+    console.log(payload, 'This is the payload I have . . . . ');
+  }, []);
+
+  useSSE(handleNew);
 
 
   useEffect(() => {
@@ -76,15 +99,11 @@ const AppRoutes: React.FC = () => {
     </Routes>;
   }
 
-  // console.log(loginData,'LoginData used for fetch and used for other apis')
 
-
-
-  // After login, always show Layout with sidebar
   return (
-    <EmailProvider>
-      <WatiProvider>
-        <AppContext.Provider value={{ loginData, setLoginData, logoUrl, setLogoUrl, selected: null, setSelected: () => { } }}>
+    <AppContext.Provider value={{ loginData, setLoginData, logoUrl, openEmailNotification, setOpenEmailNotification, openWatiNotification, setOpenWatiNotification, setLogoUrl, selected: null, setSelected: () => { } }}>
+      <EmailProvider>
+        <WatiProvider>
           <Layout companyName={loginData.companyName} logoUrl={logoUrl}>
             <Routes>
               <Route path="/wati" element={<HomePage />} />
@@ -94,10 +113,16 @@ const AppRoutes: React.FC = () => {
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="*" element={<Navigate to="/dashboard" />} />
             </Routes>
+            <NotificationModal
+              type="wati"
+              open={openWatiNotification}
+              onClose={() => setOpenWatiNotification(false)}
+              onReply={() => setOpenWatiNotification(false)}
+            />
           </Layout>
-        </AppContext.Provider>
-      </WatiProvider>
-    </EmailProvider>
+        </WatiProvider>
+      </EmailProvider>
+    </AppContext.Provider>
   );
 };
 

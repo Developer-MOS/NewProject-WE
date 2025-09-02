@@ -15,6 +15,12 @@ export interface AppContextType {
   setLogoUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
   selected: null | 'email' | 'wati';
   setSelected: React.Dispatch<React.SetStateAction<null | 'email' | 'wati'>>;
+  openEmailNotification: boolean;
+  setOpenEmailNotification: React.Dispatch<React.SetStateAction<boolean>>;
+  openWatiNotification: boolean;
+  setOpenWatiNotification: React.Dispatch<React.SetStateAction<boolean>>;
+  reFetchMessages: boolean;
+  setReFetchMessages: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
