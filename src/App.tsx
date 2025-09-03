@@ -43,6 +43,7 @@ const AppRoutes: React.FC = () => {
   const [openEmailNotification, setOpenEmailNotification] = useState(false);
   const [openWatiNotification, setOpenWatiNotification] = useState(false);
   const [reFetchMessages, setReFetchMessages] = useState(false);
+  const [reFetchEmailMessages, setReFetchEmailMessages] = useState(false);
 
 
   // const { reFetchMessages, setReFetchMessages } = useWati();
@@ -53,11 +54,21 @@ const AppRoutes: React.FC = () => {
 
   const handleNew = useCallback((payload) => {
 
-    setReFetchMessages(!reFetchMessages);
 
-    setOpenWatiNotification(true);
+    if (payload.type == "NEW_WATI") {
+      console.log("New Wati message received");
+      setReFetchMessages(!reFetchMessages);
+      setOpenWatiNotification(true);
+    }
 
-    console.log(payload, 'This is the payload I have . . . . ');
+    if (payload.type == 'NEW_EMAIL') {
+      console.log('New email message received');
+      setReFetchEmailMessages(!reFetchEmailMessages);
+      setOpenEmailNotification(true);
+    }
+
+    console.log(payload, 'Payload Im getting wile the API Call is on client side . . . . ');
+
   }, []);
 
   useSSE(handleNew);
@@ -101,7 +112,13 @@ const AppRoutes: React.FC = () => {
 
 
   return (
-    <AppContext.Provider value={{ loginData, setLoginData, logoUrl, openEmailNotification, setOpenEmailNotification, openWatiNotification, setOpenWatiNotification, setLogoUrl, selected: null, setSelected: () => { } }}>
+    <AppContext.Provider
+      value={{
+        loginData, setLoginData, logoUrl, openEmailNotification,
+        setOpenEmailNotification, openWatiNotification,
+        reFetchEmailMessages, setReFetchEmailMessages,
+        setOpenWatiNotification, setLogoUrl, selected: null, setSelected: () => { }
+      }}>
       <EmailProvider>
         <WatiProvider>
           <Layout companyName={loginData.companyName} logoUrl={logoUrl}>
@@ -118,6 +135,12 @@ const AppRoutes: React.FC = () => {
               open={openWatiNotification}
               onClose={() => setOpenWatiNotification(false)}
               onReply={() => setOpenWatiNotification(false)}
+            />
+            <NotificationModal
+              type="email"
+              open={openEmailNotification}
+              onClose={() => setOpenEmailNotification(false)}
+              onReply={() => setOpenEmailNotification(false)}
             />
           </Layout>
         </WatiProvider>

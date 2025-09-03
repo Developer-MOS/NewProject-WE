@@ -21,6 +21,8 @@ export interface AppContextType {
   setOpenWatiNotification: React.Dispatch<React.SetStateAction<boolean>>;
   reFetchMessages: boolean;
   setReFetchMessages: React.Dispatch<React.SetStateAction<boolean>>;
+  reFetchEmailMessages: boolean;
+  setReFetchEmailMessages: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);

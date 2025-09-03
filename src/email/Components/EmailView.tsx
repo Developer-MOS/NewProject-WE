@@ -6,6 +6,7 @@ import {
   MoreVert as MoreVertIcon,
 } from '@mui/icons-material';
 import { useEmail } from '../../context/EmailContext';
+import DOMPurify from 'dompurify';
 
 const EmailView = () => {
 
@@ -83,7 +84,7 @@ const EmailView = () => {
         </Box>
       </Box>
       <Divider sx={{ mb: 3 }} />
-      <Typography
+      {/* <Typography
         variant="body1"
         sx={{
           color: '#202124',
@@ -92,7 +93,13 @@ const EmailView = () => {
         }}
       >
         {selectedEmail.body}
-      </Typography>
+      </Typography> */}
+      <div
+        style={{ color: "#202124", lineHeight: 1.5 }}
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(selectedEmail.body),
+        }}
+      />
     </Box>
   );
 };

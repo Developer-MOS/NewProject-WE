@@ -373,6 +373,7 @@
 
 import axios from 'axios';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { useAppContext } from './AppContext';
 
 axios.defaults.withCredentials = true;
 
@@ -408,6 +409,7 @@ interface EmailContextType {
 const EmailContext = createContext<EmailContextType | undefined>(undefined);
 
 export function EmailProvider({ children }: { children: React.ReactNode }) {
+  const { reFetchEmailMessages } = useAppContext();
   const [emails, setEmails] = useState<Email[]>([]);
   const [selectedEmail, setSelectedEmail] = useState<Email | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -425,8 +427,8 @@ export function EmailProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await axios.get('http://localhost:3000/gmail/messages');
       // setEmails(response.data.messages || []);
-      console.log(response.data.data);
-      setEmails(response.data.data || []);
+      console.log(response.data);
+      setEmails(response.data || []);
       setIsAuthenticated(true);
     } catch (error) {
       console.error("Error fetching emails:", error);
@@ -438,7 +440,7 @@ export function EmailProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     fetchEmails();
-  }, []);
+  }, [reFetchEmailMessages]);
 
   const toggleStar = async (emailId: string) => {
     try {
