@@ -33,6 +33,8 @@ export interface WatiContextType {
     setMessage: (msg: string) => void;
     loading: boolean;
     handleSendMessage: (msg: unknown) => Promise<void>;
+    openChats: { id: number }[];
+    setOpenChats: (chats: { id: number }[]) => void;
     // reFetchMessages : boolean;
     // setReFetchMessages : (value : boolean) => void;
 }

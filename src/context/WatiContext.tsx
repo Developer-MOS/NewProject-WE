@@ -17,6 +17,8 @@ export const WatiProvider = ({ children }: { children: ReactNode }) => {
     const { reFetchMessages } = useAppContext();
     // const [reFetchMessages, setReFetchMessages] = useState(false);
 
+    const [openChats, setOpenChats] = useState<{ id: number }[]>([]);
+
     useEffect(() => {
         const getData = async () => {
             setLoading(true);
@@ -67,6 +69,12 @@ export const WatiProvider = ({ children }: { children: ReactNode }) => {
         }
     };
 
+
+    console.log(chatLists, 'This is the CHAT LISTS OPTION');
+    console.log(currentActiveChatMessages, 'This is the CURRENT ACTIVE CHAT MESSAGES OPTION');
+    console.log(currentActiveChatObjData, 'This is the CURRENT ACTIVE CHAT OBJ DATA OPTION');
+
+
     return (
         <WatiContext.Provider value={{
             chatLists,
@@ -77,7 +85,9 @@ export const WatiProvider = ({ children }: { children: ReactNode }) => {
             message,
             setMessage,
             loading,
-            handleSendMessage
+            handleSendMessage,
+            openChats,
+            setOpenChats,
         }}>
             {children}
         </WatiContext.Provider>

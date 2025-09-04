@@ -1,8 +1,42 @@
 import { Avatar, Box, Typography } from '@mui/material';
 import { useWati } from '../../context/WatiContext.types';
+import ChatWindow from '../Components/ChatWindow';
 
 const LeftMenu: React.FC = () => {
-    const { chatLists, setSelectedChatMobileNumber } = useWati();
+    const { chatLists, setSelectedChatMobileNumber, setOpenChats, openChats } = useWati();
+
+
+    // const handleOpenChat = (chat: { id: number }) => {
+    //     setOpenChats((prevChats) : chat: { id: number } => {
+    //         if (prevChats.find((c) => c.id === chat.id)) {
+    //             return prevChats; // Chat is already open
+    //         }
+    //         if (prevChats.length >= 2) {
+    //             return prevChats; // Maximum of 2 windows allowed
+    //         }
+    //         return [...prevChats, chat];
+    //     });
+    // };
+
+
+
+    const handleOpenChat = (chat: { id: number }) => {
+        setOpenChats((prevChats) => {
+            if (prevChats.find((c) => c.id === chat.id)) {
+                return prevChats;
+            }
+            if (prevChats.length >= 2) {
+                return prevChats;
+            }
+            return [...prevChats, chat];
+        });
+    };
+
+
+    const handleCloseChat = (chatId: number) => {
+        setOpenChats((prevChats) => prevChats.filter((chat) => chat.id !== chatId));
+    };
+
     return (
         <Box sx={{
             borderRadius: 1,
@@ -32,11 +66,14 @@ const LeftMenu: React.FC = () => {
                             transition: 'transform 0.1s ease-in-out'
                         }
                     }}
-                    onClick={() => setSelectedChatMobileNumber(item.phone)}
+                    onClick={() => {
+                        setSelectedChatMobileNumber(item.phone)
+                        handleOpenChat({ id: Number(item?.phone) });
+                    }}
                 >
                     <Avatar
                         sx={{
-                            ml:2,
+                            ml: 2,
                             background: 'none',
                             border: '1px solid #4e54c8',
                             color: '#4e54c8',
@@ -68,6 +105,21 @@ const LeftMenu: React.FC = () => {
                     </Box>
                 </Box>
             ))}
+            {openChats.map((chat,index) => (
+                <ChatWindow
+                    key={chat.id}
+                    index={index}
+                    chatId={Number(chat.id)}
+                    onClose={() => handleCloseChat(chat.id)}
+                />
+            ))}
+
+            {/* <ChatWindow
+                // key={chat.id}
+                chatId={Number(20)}
+                onClose={() => {}}
+            /> */}
+
         </Box>
     );
 };
