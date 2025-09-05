@@ -108,18 +108,7 @@ const WatiDemo = () => {
 
 const DailerDemo = () => (
   <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-    {/* <Typography variant="h4" color="#0d47a1" mb={1}>Dailer</Typography> */}
-    {/* <Typography variant="body1" color="#1976d2"> Dailer section. </Typography> */}
-    {/* <DailerPage /> */}
-
-    <iframe
-      src='http://192.168.100.205'
-      title='Dailer'
-      width={'100%'}
-      height={'100%'}
-      style={{ border: 'none' }}
-    />
-
+    <DailerPage />
   </Box>
 );
 
